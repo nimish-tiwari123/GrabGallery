@@ -1,0 +1,26 @@
+:root {
+  --primary: #062a41;
+  --white: #ffffff;
+}
+*{
+  font-family: "Roboto", sans-serif;
+}
+.form-control:focus {
+  box-shadow: none;
+}
+
+.bg-primary {
+  background-color: var(--primary) !important;
+}
+.btn-border {
+  border: 2px solid var(--primary);
+}
+.text-primary{
+  color: var(--primary) !important;
+}
+.text-underline{
+  text-decoration: underline;
+}
+.cursor-pointer{
+  cursor: pointer;
+}
