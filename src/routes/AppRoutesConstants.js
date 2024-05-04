@@ -1,12 +1,30 @@
 export const routesConstant = {
-  
-  login:{
-    path:"/login",
+  home: {
+    path: "/",
   },
-  signup:{
-    path:"/signup",
+  login: {
+    path: "/login",
   },
-  forgotpassword:{
-    path:"/forgotpassword",
-  }
+  signup: {
+    path: "/signup",
+  },
+  forgotpassword: {
+    path: "/forgotpassword",
+  },
+  createpassword: {
+    path: "/createpassword",
+  },
+  otpverification: {
+    path: "otp",
+  },
+
+  noconnection: {
+    path: "/noconnection",
+  },
+  pagenotfound: {
+    path: "/pagenotfound",
+  },
+  nodatafound: {
+    path: "/nodatafound",
+  },
 };

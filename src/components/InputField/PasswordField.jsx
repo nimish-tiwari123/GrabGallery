@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { showpassword, hidepassword } from "../../assets/icons";
-const InputField = (props) => {
+const PasswordField = (props) => {
   const { label, name, placeholder, rows, formik, required } = props;
   const [showPassword, setShowPassword] = useState(false);
 
@@ -40,9 +40,17 @@ const InputField = (props) => {
           className="spanIcon position-absolute cursor-pointer top-0 end-0 pe-3 pt-1"
         >
           {showPassword ? (
-            <img src={showpassword} style={{width:"17px"}} className="mt-2"/>
+            <img
+              src={showpassword}
+              style={{ width: "17px" }}
+              className="mt-2"
+            />
           ) : (
-            <img src={hidepassword} style={{width:"17px"}} className="mt-2"/>
+            <img
+              src={hidepassword}
+              style={{ width: "17px" }}
+              className="mt-2"
+            />
           )}
         </span>
       </div>
@@ -55,4 +63,4 @@ const InputField = (props) => {
   );
 };
 
-export default InputField;
+export default PasswordField;

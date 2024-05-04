@@ -12,6 +12,7 @@
 .bg-primary {
   background-color: var(--primary) !important;
 }
+
 .btn-border {
   border: 2px solid var(--primary);
 }

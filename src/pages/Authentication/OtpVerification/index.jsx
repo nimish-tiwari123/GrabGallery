@@ -1,16 +1,16 @@
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
-import { forgotPasswordSchema } from "../../../schema/Authentication";
+import { otpVerificationSchema } from "../../../schema/Authentication";
 import PrimaryButton from "../../../components/Authentication/Button/PrimaryButton";
 import InputField from "../../../components/InputField";
-const ForgotPassword = () => {
+const OtpVerification = () => {
   const navigate = useNavigate();
   // FORM Schema
-  const validationSchema = forgotPasswordSchema;
+  const validationSchema = otpVerificationSchema;
 
   const formik = useFormik({
     initialValues: {
-      email: "",
+      otp: "",
     },
     validationSchema,
     onSubmit: async (values) => {
@@ -22,11 +22,11 @@ const ForgotPassword = () => {
       <form className="text-start fw-500" onSubmit={formik.handleSubmit}>
         <div className="mt-2">
           <InputField
-            label="Email"
+            label="Enter Verification Code"
             required="*"
-            name="email"
-            type="email"
-            placeholder="Your email"
+            name="otp"
+            type="text"
+            placeholder="000000"
             formik={formik}
           />
         </div>
@@ -36,9 +36,9 @@ const ForgotPassword = () => {
             navigate("/login");
           }}
         >
-          Back to login
+         Resend
         </div>
-        <PrimaryButton btnText="Send Otp" />
+        <PrimaryButton btnText="Submit" />
       </form>
       <div className="text-primary text-center p-2">
         Don’t have an account?{" "}
@@ -54,4 +54,4 @@ const ForgotPassword = () => {
     </>
   );
 };
-export default ForgotPassword;
+export default OtpVerification;
