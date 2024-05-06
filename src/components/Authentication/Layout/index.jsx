@@ -2,6 +2,7 @@
 import { Container, Row, Col } from "react-bootstrap";
 import { layoutVector } from "../../../assets/Authentication";
 import { logo } from "../../../assets/index";
+
 import "./style.css";
 const Layout = ({ children }) => {
   return (

@@ -27,4 +27,10 @@ export const routesConstant = {
   nodatafound: {
     path: "/nodatafound",
   },
+
+  // Admin Routes
+
+  dashboard:{
+    path:"/*"
+  }
 };

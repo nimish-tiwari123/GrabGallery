@@ -1,9 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 :root {
   --primary: #062a41;
   --white: #ffffff;
+  --secondary: #eceff1;
 }
-*{
+* {
   font-family: "Roboto", sans-serif;
+}
+.primary-font {
+  font-family: "Josefin Sans", sans-serif;
 }
 .form-control:focus {
   box-shadow: none;
@@ -12,16 +17,19 @@
 .bg-primary {
   background-color: var(--primary) !important;
 }
-
+.bg-secondary {
+  background-color: var(--secondary) !important;
+}
 .btn-border {
   border: 2px solid var(--primary);
 }
-.text-primary{
+.text-primary {
   color: var(--primary) !important;
 }
-.text-underline{
+.text-underline {
   text-decoration: underline;
 }
-.cursor-pointer{
+.cursor-pointer {
   cursor: pointer;
 }
+

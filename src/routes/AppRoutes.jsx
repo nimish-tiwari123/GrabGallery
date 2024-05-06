@@ -11,6 +11,7 @@ import {
   OtpVerification,
 } from "../pages/Authentication";
 import { NoConnection, NoDataFound, PageNotFound } from "../components";
+import AdminRoutes from "../pages/Admin/routes/AdminRoutes";
 
 export const AppRoutes = () => {
   return (
@@ -64,6 +65,10 @@ export const AppRoutes = () => {
                 <OtpVerification />
               </Layout>
             }
+          />
+           <Route
+            path={routesConstant.dashboard.path}
+            element={<AdminRoutes />}
           />
           <Route
             path={routesConstant.noconnection.path}

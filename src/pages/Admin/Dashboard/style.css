@@ -1,0 +1,45 @@
+.chart {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    height: 300px; 
+    padding: 20px 0;
+  }
+  
+  .bar {
+    background-color: #CFD8DC !important; 
+    transition: background-color 0.3s ease;
+    width: 20px !important;
+  }
+ 
+  
+  .bar:hover {
+    background-color: #062a41 !important; 
+  }
+  
+  .primary-font {
+    font-family: Arial, sans-serif; 
+  }
+  
+  .tooltiptext {
+    visibility: hidden;
+    width: auto;
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 110%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  .bar:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+  }
+  

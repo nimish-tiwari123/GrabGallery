@@ -1,0 +1,16 @@
+.headerbar{
+    height: 60px;
+}
+.headbar-icon{
+    height: 35px;
+    width: 35px !important;
+    border: 2px solid rgba(221, 220, 220, 0.426);
+}
+
+@media screen and (max-width:768px) {
+    .headbar-icon{
+        height: 30px;
+        width: 30px !important;
+        padding: 15px !important;
+    } 
+}
