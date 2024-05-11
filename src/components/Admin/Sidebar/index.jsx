@@ -26,22 +26,22 @@ const Sidebar = ({ children }) => {
             className="logo ms-4"
           />
           <div
-            style={{ marginLeft: isOpen ? "0px" : "0px" }}
-            className="toggle-btn position-absolute top-0 end-0 me-3 mt-3 cursor-pointer"
+            className="toggle-btn position-absolute top-0 end-0 mt-3 cursor-pointer"
+            style={{marginRight:"30px"}}
           >
             {!isOpen ? (
               <img
                 src={togglearrow1}
                 alt="toggle"
                 onClick={toggle}
-                className="toggle bg-light rounded-circle p-2 position-absolute"
+                className="toggle bg-secondary rounded-start-4 p-2 position-absolute "
               />
             ) : (
               <img
                 src={togglearrow2}
                 alt="toggle"
                 onClick={toggle}
-                className="toggle bg-light rounded-circle p-2 position-absolute"
+                className="toggle bg-secondary rounded-start-4 p-2 position-absolute"
               />
             )}
           </div>
@@ -72,9 +72,10 @@ const Sidebar = ({ children }) => {
         </div>
       </div>
 
-      <main className="w-100" style={{ height: "calc(100vh - 60px)" }}>
+      <main className="w-100" >
         <HeadNavbar itemName={activeItemName} />
-        <div className="bg-secondary h-100 ">{children}</div>
+        <div className="bg-secondary" style={{ height: "calc(100vh - 60px)" }}>{children}</div>
+
       </main>
     </div>
   );

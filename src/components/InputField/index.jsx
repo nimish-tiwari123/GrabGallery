@@ -24,7 +24,7 @@ const InputField = (props) => {
         id={name}
         name={name}
         rows={rows}
-        className={clsx("form-control rounded-3 px-4 py-2", style)}
+        className={clsx("form-control rounded-3 px-4 py-2 bg-sub-secondary", style)}
         placeholder={placeholder}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}

@@ -1,4 +1,3 @@
-
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import InputField from "../../../components/InputField";
@@ -6,9 +5,11 @@ import PasswordField from "../../../components/InputField/PasswordField";
 import { loginSchema } from "../../../schema/Authentication";
 import SecondaryButton from "../../../components/Authentication/Button/SecondaryButton";
 import PrimaryButton from "../../../components/Authentication/Button/PrimaryButton";
-
+import { useLoginUserMutation } from "../../../apis/service";
+import Loader from "../../../components/Loader";
 const Login = () => {
   const navigate = useNavigate();
+  const [verifyUser, {isLoading}] = useLoginUserMutation();
   // FORM Schema
   const validationSchema = loginSchema;
 
@@ -19,11 +20,26 @@ const Login = () => {
     },
     validationSchema,
     onSubmit: async (values) => {
-      console.log(values);
+      try {
+        const user = {
+          email: values.email,
+          password: values.password,
+        };
+        const { data, error } = await verifyUser(user);
+        if (error) {
+          alert(error.data.message);
+        } else {
+          alert(data.message);
+          navigate("/dashboard");
+        }
+      } catch (err) {
+        console.log(err);
+      }
     },
   });
   return (
     <>
+    {isLoading && <Loader/>}
       <form className="text-start fw-500" onSubmit={formik.handleSubmit}>
         <div className="mt-2">
           <InputField
@@ -43,11 +59,16 @@ const Login = () => {
             placeholder="Enter password"
             formik={formik}
           />
-          
         </div>
-        <p className="text-primary text-end fw-bold my-4 cursor-pointer" onClick={()=>{navigate("/forgotpassword")}}>Forgot password</p>
-       <PrimaryButton btnText="Login"/>
-       
+        <p
+          className="text-primary text-end fw-bold my-4 cursor-pointer"
+          onClick={() => {
+            navigate("/forgotpassword");
+          }}
+        >
+          Forgot password
+        </p>
+        <PrimaryButton btnText="Login" />
       </form>
       <div
         className="bg-secondary-subtle my-4 position-relative d-flex justify-content-center"
@@ -60,7 +81,12 @@ const Login = () => {
           OR
         </span>
       </div>
-<SecondaryButton btnText="Sign Up" onClick={()=>{navigate("/signup")}}/>
+      <SecondaryButton
+        btnText="Sign Up"
+        onClick={() => {
+          navigate("/signup");
+        }}
+      />
     </>
   );
 };

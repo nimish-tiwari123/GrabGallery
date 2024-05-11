@@ -5,6 +5,9 @@ export const routesConstant = {
   productmanagement: {
     path: "/productmanagement",
   },
+  addproduct:{
+    path: "/productmanagement/addproduct",
+  },
   stockmanagement: {
     path: "/stockmanagement",
   },

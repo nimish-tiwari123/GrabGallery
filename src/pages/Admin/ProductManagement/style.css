@@ -22,6 +22,27 @@
 .product-img {
   max-height: 60px;
 }
+.text-underline-none{
+  text-decoration: none;
+}
+.select-product-label{
+  border: 1px solid rgba(203, 202, 202, 0.682);
+  background-color: rgba(203, 202, 202, 0.253);
+  transition: 0.5s all ease-in-out;
+}
+.select-product-label:hover{
+  border: 1.5px solid var(--primary);
+}
+.comon-border{
+  border: 1px solid rgba(203, 202, 202, 0.682);
+
+}
+@media screen  and (max-width:768px){
+  .comon-border{
+    border: none;
+  
+  }
+}
 @media screen and (max-width: 1300px) and (min-width: 768px) {
   .add-product-btn {
     font-size: 11px;
@@ -29,6 +50,4 @@
   }
 }
 
-@media screen and (max-width: 768px) {
- 
-}
+

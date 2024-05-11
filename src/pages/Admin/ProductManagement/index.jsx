@@ -3,12 +3,14 @@ import Searchbar from "../../../components/Admin/Searchbar";
 import "./style.css";
 import ProductTable from "./ProductTable";
 import PrimaryButton from "../../../components/Button/PrimaryButton";
+import { useNavigate } from "react-router-dom";
 const ProductManagement = () => {
+  const navigate = useNavigate();
   return (
     <>
       <Container fluid className="p-3 overflow-auto h-100 ">
         <Row>
-          <Col md={6} lg={7} className="d-flex justify-content-between">
+          <Col md={6} lg={7}>
             <h2 className="text-primary fw-bolder primary-font">
               Product Management
             </h2>
@@ -22,6 +24,7 @@ const ProductManagement = () => {
                 <button
                   className="rounded-3 border bg-primary text-light px-3 w-100 add-product-btn"
                   style={{ height: "40px" }}
+                  onClick={()=>navigate("/productmanagement/addproduct")}
                 >
                   + Add Product
                 </button>

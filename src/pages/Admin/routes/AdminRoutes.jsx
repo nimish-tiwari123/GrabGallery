@@ -9,6 +9,7 @@ import UserManagement from "../UserManagement";
 import CustomerFeedback from "../CustomerFeedback";
 import Notification from "../Notification";
 import Sidebar from "../../../components/Admin/Sidebar";
+import AddProduct from "../ProductManagement/AddProduct";
 
 export const AdminRoutes = () => {
   return (
@@ -27,6 +28,14 @@ export const AdminRoutes = () => {
           element={
             <Sidebar>
               <ProductManagement />
+            </Sidebar>
+          }
+        />
+          <Route
+          path={routesConstant.addproduct.path}
+          element={
+            <Sidebar>
+              <AddProduct />
             </Sidebar>
           }
         />

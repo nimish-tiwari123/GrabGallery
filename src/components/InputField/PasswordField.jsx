@@ -22,7 +22,7 @@ const PasswordField = (props) => {
           id={name}
           name={name}
           rows={rows}
-          className={"form-control rounded-3 px-4 py-2"}
+          className={"form-control rounded-3 px-4 py-2 bg-sub-secondary"}
           placeholder={placeholder}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}

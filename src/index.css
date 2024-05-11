@@ -1,14 +1,18 @@
-@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+@import url('https://fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&display=swap');
+
 :root {
   --primary: #062a41;
   --white: #ffffff;
   --secondary: #eceff1;
+  --subSecondary: #eceff18e;
+  --orenge:#F5921F;
 }
 * {
   font-family: "Roboto", sans-serif;
 }
 .primary-font {
-  font-family: "Josefin Sans", sans-serif;
+  font-family: "ZCOOL XiaoWei", sans-serif;
 }
 .form-control:focus {
   box-shadow: none;
@@ -19,6 +23,12 @@
 }
 .bg-secondary {
   background-color: var(--secondary) !important;
+}
+.bg-sub-secondary {
+  background-color: var(--subSecondary) !important;
+}
+.text-orenge{
+  color: var(--orenge);
 }
 .btn-border {
   border: 2px solid var(--primary);
@@ -32,4 +42,3 @@
 .cursor-pointer {
   cursor: pointer;
 }
-

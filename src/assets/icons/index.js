@@ -5,6 +5,8 @@ import action from "./action.svg";
 import tableheader from "./tableheader.svg";
 import backTick from "./backTick.svg";
 import nextTick from "./nextTick.svg";
+import backIcon from "./backIcon.svg";
+import upload from "./upload.svg";
 
 export {
   showpassword,
@@ -14,4 +16,6 @@ export {
   tableheader,
   nextTick,
   backTick,
+  backIcon,
+  upload
 };

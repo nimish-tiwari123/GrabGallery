@@ -3,8 +3,15 @@ import { useNavigate } from "react-router-dom";
 import { otpVerificationSchema } from "../../../schema/Authentication";
 import PrimaryButton from "../../../components/Authentication/Button/PrimaryButton";
 import InputField from "../../../components/InputField";
+import { useForgotPasswordMutation, useOtpVerficationMutation } from "../../../apis/service";
+import Loader from "../../../components/Loader";
+
 const OtpVerification = () => {
   const navigate = useNavigate();
+  const [otpVerify,{isLoading}] = useOtpVerficationMutation();
+  const [resendOtp,{isLoading:isLoadingResend}] = useForgotPasswordMutation();
+  const email = localStorage.getItem("email");
+
   // FORM Schema
   const validationSchema = otpVerificationSchema;
 
@@ -14,11 +21,43 @@ const OtpVerification = () => {
     },
     validationSchema,
     onSubmit: async (values) => {
-      console.log(values);
+      try {
+
+        const userData = {
+          email: email,
+          otp: values.otp,
+        };
+        const { data, error } = await otpVerify(userData);
+        if (data) {
+          alert(data.message);
+          navigate("/createpassword");
+        } else {
+          alert(error.data.message);
+        }
+      } catch (err) {
+        console.log(err);
+      }
     },
   });
+  const resend = async()  =>{
+    try {
+      const userEmail = {
+        email: email,
+      };
+      const { data, error } = await resendOtp(userEmail);
+      if (data) {
+        alert(data.message);
+      } else {
+        alert(error.data.message);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
   return (
     <>
+    {(isLoading || isLoadingResend )&& <Loader/>}
+
       <form className="text-start fw-500" onSubmit={formik.handleSubmit}>
         <div className="mt-2">
           <InputField
@@ -32,11 +71,9 @@ const OtpVerification = () => {
         </div>
         <div
           className="text-secondary my-4 text-center cursor-pointer"
-          onClick={() => {
-            navigate("/login");
-          }}
+          onClick={() => resend()}
         >
-         Resend
+          Resend
         </div>
         <PrimaryButton btnText="Submit" />
       </form>

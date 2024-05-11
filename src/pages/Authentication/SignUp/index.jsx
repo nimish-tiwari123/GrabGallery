@@ -4,8 +4,12 @@ import PasswordField from "../../../components/InputField/PasswordField";
 import InputField from "../../../components/InputField";
 import { signUpSchema } from "../../../schema/Authentication";
 import PrimaryButton from "../../../components/Authentication/Button/PrimaryButton";
+import { useCreateUserMutation } from "../../../apis/service";
+import Loader from "../../../components/Loader";
+
 const SignUp = () => {
   const navigate = useNavigate();
+  const [createUser,{isLoading}] = useCreateUserMutation();
 
   // FORM Schema
   const validationSchema = signUpSchema;
@@ -19,11 +23,32 @@ const SignUp = () => {
     },
     validationSchema,
     onSubmit: async (values) => {
-      console.log(values);
+      try {
+        const newUser = {
+          name: values.name,
+          email: values.email,
+          password: values.password,
+          number: values.number,
+        };
+        const {data, error} = await createUser(newUser);
+        if(data){
+          alert(data.message);
+          navigate("/login");
+
+        }
+        else{
+          alert(error.data.message);
+        }
+        
+      } catch (err) {
+        console.log(err);
+      }
     },
   });
   return (
     <>
+    {isLoading && <Loader/>}
+
       <form className="text-start fw-500" onSubmit={formik.handleSubmit}>
         <div className="mt-2">
           <InputField

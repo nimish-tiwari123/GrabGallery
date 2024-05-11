@@ -3,8 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { forgotPasswordSchema } from "../../../schema/Authentication";
 import PrimaryButton from "../../../components/Authentication/Button/PrimaryButton";
 import InputField from "../../../components/InputField";
+import { useForgotPasswordMutation } from "../../../apis/service";
+import Loader from "../../../components/Loader";
+
 const ForgotPassword = () => {
   const navigate = useNavigate();
+  const [forgotPassword,{isLoading}] = useForgotPasswordMutation();
   // FORM Schema
   const validationSchema = forgotPasswordSchema;
 
@@ -14,11 +18,27 @@ const ForgotPassword = () => {
     },
     validationSchema,
     onSubmit: async (values) => {
-      console.log(values);
+      try {
+        const userEmail = {
+          email: values.email,
+        };
+        const { data, error } = await forgotPassword(userEmail);
+        if (data) {
+          localStorage.setItem("email", values.email);
+          alert(data.message);
+          navigate("/otp");
+        } else {
+          alert(error.data.message);
+        }
+      } catch (err) {
+        console.log(err);
+      }
     },
   });
   return (
     <>
+    {isLoading && <Loader/>}
+
       <form className="text-start fw-500" onSubmit={formik.handleSubmit}>
         <div className="mt-2">
           <InputField
