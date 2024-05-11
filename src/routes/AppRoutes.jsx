@@ -21,9 +21,9 @@ export const AppRoutes = () => {
           <Route
             path={routesConstant.home.path}
             element={
-              <h1 className="text-primary fw-bolder text-center pt-5 mt-5">
-                Welcome to Grab Gallery
-              </h1>
+              <Layout>
+                <Login />
+              </Layout>
             }
           />
           <Route
