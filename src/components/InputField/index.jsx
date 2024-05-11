@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-import clsx from "clsx";
 
 const InputField = (props) => {
   const {
@@ -9,7 +8,6 @@ const InputField = (props) => {
     rows,
     formik,
     type = "text",
-    style = "",
     required,
   } = props;
 
@@ -24,7 +22,7 @@ const InputField = (props) => {
         id={name}
         name={name}
         rows={rows}
-        className={clsx("form-control rounded-3 px-4 py-2 bg-sub-secondary", style)}
+        className={"form-control rounded-3 px-4 py-2 bg-sub-secondary"}
         placeholder={placeholder}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
