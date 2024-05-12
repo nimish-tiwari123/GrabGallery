@@ -9,22 +9,36 @@ import TextAreaField from "../../../components/InputField/TextAreaField";
 import RadioField from "../../../components/InputField/RadioField";
 import { addproductSchema } from "../../../schema/ProductManagement";
 import { noImage } from "../../../assets";
+import SelectField from "../../../components/InputField/SelectField";
+import {
+  categoryOptions,
+  clothingCategories,
+  sizeOptions,
+  ageOptions,
+} from "../constant";
 import "./style.css";
 
 const AddProduct = () => {
   const navigate = useNavigate();
   const [selectedImages, setSelectedImages] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("mens");
+
+  const handleCategoryChange = (selectedOption) => {
+    setSelectedCategory(selectedOption.target.value); // Use target.value to get the selected value
+  };
 
   const validationSchema = addproductSchema;
   const formik = useFormik({
     initialValues: {
       name: "",
-      category: "",
+      category: "mens",
+      clothingCategories: "tshirts",
       brand: "",
-      productImages:selectedImages,
+      productImages: selectedImages,
       color: "",
       material: "",
       size: "",
+      age: "",
       description: "",
       featured: false,
       price: "",
@@ -48,13 +62,24 @@ const AddProduct = () => {
       alert("You can only select up to 6 images.");
       return;
     }
-    setSelectedImages([...selectedImages, ...files]);
+    // Filter out excess images if the total selected images exceed 6
+    const newSelectedImages = selectedImages.concat(
+      files.slice(0, 6 - selectedImages.length)
+    );
+    setSelectedImages(newSelectedImages);
   };
+  const handleRemoveImage = (indexToRemove) => {
+    const updatedImages = selectedImages.filter(
+      (image, index) => index !== indexToRemove
+    );
+    setSelectedImages(updatedImages);
+  };
+
   return (
     <>
       <Container fluid className="px-1 py-3 p-md-3 overflow-auto h-100 ">
         <Row>
-          <Col md={6} lg={7}>
+          <Col md={6} className="mt-2" lg={7}>
             <h2 className="text-primary fw-bolder primary-font ">
               <button
                 className="back-icon border-0 d-inline-block d-md-none"
@@ -70,7 +95,7 @@ const AddProduct = () => {
               Add Product
             </h2>
           </Col>
-          <Col md={6} lg={5}>
+          <Col md={6} className="mt-2" lg={5}>
             <Breadcrumb className="d-md-flex justify-content-end pt-2 d-none">
               <Link
                 to="/productmanagement"
@@ -89,7 +114,7 @@ const AddProduct = () => {
           </Col>
         </Row>
         <hr className="text-secondary m-0" />
-        <Row className="bg-white m-0 px-4 py-5 mt-3 rounded-3 overflow-auto">
+        <Row className="bg-white m-0 px-3 py-4 mt-3 rounded-3 overflow-auto">
           <form className="text-start fw-500" onSubmit={formik.handleSubmit}>
             {/* Basic Details */}
             <Container fluid>
@@ -97,7 +122,7 @@ const AddProduct = () => {
                 <h4>Basic Details</h4>
                 <Col md={8}>
                   <Row>
-                    <Col md={6}>
+                    <Col md={6} className="mt-2">
                       <InputField
                         label="Name"
                         required="*"
@@ -106,16 +131,7 @@ const AddProduct = () => {
                         formik={formik}
                       />
                     </Col>
-                    <Col md={6}>
-                      <InputField
-                        label="Category"
-                        required="*"
-                        name="category"
-                        placeholder="Product Category"
-                        formik={formik}
-                      />
-                    </Col>
-                    <Col md={6}>
+                    <Col md={6} className="mt-2">
                       <InputField
                         label="Brand"
                         required="*"
@@ -124,7 +140,51 @@ const AddProduct = () => {
                         formik={formik}
                       />
                     </Col>
-                    <Col md={6}>
+                    <Col md={6} className="mt-2">
+                      <SelectField
+                        label="Category"
+                        name="category"
+                        options={categoryOptions}
+                        formik={formik}
+                        required="*"
+                        onChange={handleCategoryChange}
+                      />
+                    </Col>
+
+                    {selectedCategory === "mens" ||
+                    selectedCategory === "womens" ? (
+                      <Col md={6} className="mt-2">
+                        {/* Render size field for men or women */}
+                        <SelectField
+                          label="Size"
+                          name="size"
+                          options={sizeOptions}
+                          formik={formik}
+                        />
+                      </Col>
+                    ) : selectedCategory === "kids" ? (
+                      <Col md={6} className="mt-2">
+                        {/* Render age field for kids */}
+                        <SelectField
+                          label="Age"
+                          name="age"
+                          options={ageOptions}
+                          formik={formik}
+                        />
+                      </Col>
+                    ) : null}
+
+                    <Col md={6} className="mt-2">
+                      <SelectField
+                        label="Clothing Categories"
+                        name="clothingCategories"
+                        options={clothingCategories}
+                        formik={formik}
+                        required="*"
+                      />
+                    </Col>
+
+                    <Col md={6} className="mt-2">
                       <InputField
                         label="Color"
                         required="*"
@@ -133,7 +193,7 @@ const AddProduct = () => {
                         formik={formik}
                       />
                     </Col>
-                    <Col md={6}>
+                    <Col md={6} className="mt-2">
                       <InputField
                         label="Material/Fabric"
                         required="*"
@@ -142,16 +202,8 @@ const AddProduct = () => {
                         formik={formik}
                       />
                     </Col>
-                    <Col md={6}>
-                      <InputField
-                        label="Size"
-                        required="*"
-                        name="size"
-                        placeholder="Product Size"
-                        formik={formik}
-                      />
-                    </Col>
-                    <Col md={12}>
+
+                    <Col md={12} className="mt-2">
                       {/* Description */}
                       <TextAreaField
                         label="Description"
@@ -161,7 +213,7 @@ const AddProduct = () => {
                         formik={formik}
                       />
                     </Col>
-                    <Col md={12}>
+                    <Col md={12} className="mt-2">
                       {/* Featured */}
                       <div className="form-check">
                         <input
@@ -206,11 +258,19 @@ const AddProduct = () => {
                   <Row className="mt-3">
                     {selectedImages.map((image, index) => (
                       <Col key={index} className="p-2 col-4">
-                        <img
-                          src={URL.createObjectURL(image)}
-                          alt={`Image ${index + 1}`}
-                          className="border rounded-3 w-100"
-                        />
+                        <div className="position-relative">
+                          <img
+                            src={URL.createObjectURL(image)}
+                            alt={`Image ${index + 1}`}
+                            className="border rounded-3 w-100"
+                          />
+                          <button
+                            type="button"
+                            className="btn-close position-absolute top-0 end-0 p-2 cross-btn"
+                            aria-label="Close"
+                            onClick={() => handleRemoveImage(index)}
+                          ></button>
+                        </div>
                       </Col>
                     ))}
                     {selectedImages.length === 0 && (
@@ -225,7 +285,7 @@ const AddProduct = () => {
             <Container fluid className="mt-4">
               <Row className="comon-border rounded-3 px-md-3 py-4">
                 <h4>Price Details</h4>
-                <Col lg={4} md={6}>
+                <Col lg={4} md={6} className="mt-2">
                   <InputField
                     label="Price"
                     required="*"
@@ -234,7 +294,7 @@ const AddProduct = () => {
                     formik={formik}
                   />
                 </Col>
-                <Col lg={4} md={6}>
+                <Col lg={4} md={6} className="mt-2">
                   <InputField
                     label="Discount"
                     name="discount"
@@ -242,7 +302,7 @@ const AddProduct = () => {
                     formik={formik}
                   />
                 </Col>
-                <Col lg={4} md={6}>
+                <Col lg={4} md={6} className="mt-2">
                   <InputField
                     label="Discount Price"
                     name="discountPrice"
@@ -250,7 +310,7 @@ const AddProduct = () => {
                     formik={formik}
                   />
                 </Col>
-                <Col lg={4} md={6}>
+                <Col lg={4} md={6} className="mt-2">
                   <InputField
                     label="Discount Start Date"
                     type="date"
@@ -258,7 +318,7 @@ const AddProduct = () => {
                     formik={formik}
                   />
                 </Col>
-                <Col lg={4} md={6}>
+                <Col lg={4} md={6} className="mt-2">
                   <InputField
                     label="Discount End Date"
                     type="date"
@@ -266,7 +326,7 @@ const AddProduct = () => {
                     formik={formik}
                   />
                 </Col>
-                <Col lg={4} md={6}>
+                <Col lg={4} md={6} className="mt-2">
                   <InputField
                     label="Tax"
                     name="tax"
@@ -280,7 +340,7 @@ const AddProduct = () => {
             {/* Stock Details */}
             <Row className="comon-border rounded-3 my-4 m-0 px-md-3 py-4">
               <h4>Stock Details</h4>
-              <Col lg={4} md={6}>
+              <Col lg={4} md={6} className="mt-2">
                 <InputField
                   label="Total Stock Quantity"
                   required="*"
@@ -289,7 +349,7 @@ const AddProduct = () => {
                   formik={formik}
                 />
               </Col>
-              <Col lg={4} md={6}>
+              <Col lg={4} md={6} className="mt-2">
                 <InputField
                   label="Available Stock"
                   required="*"
@@ -299,7 +359,7 @@ const AddProduct = () => {
                 />
               </Col>
 
-              <Col lg={4} md={6}>
+              <Col lg={4} md={6} className="mt-2">
                 {/* Stock Status */}
                 <RadioField
                   label="Stock Status"

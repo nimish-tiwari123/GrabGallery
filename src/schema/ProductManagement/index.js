@@ -2,10 +2,12 @@ import * as Yup from "yup";
 export const addproductSchema = Yup.object().shape({
     name: Yup.string().required("Product name is required"),
     category: Yup.string().required("Category is required"),
+    clothingCategories: Yup.string().required("Cloth Category is required"),
     brand: Yup.string().required("Brand is required"),
     color: Yup.string().required("Color is required"),
     material: Yup.string().required("Material is required"),
-    size: Yup.string().required("size is required"),
+    size: Yup.string(),
+    age:Yup.string(),
     description: Yup.string().required("description is required"),
     featured: Yup.boolean(),
     price: Yup.number().required("Price is required"),

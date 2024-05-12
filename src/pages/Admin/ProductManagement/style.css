@@ -37,6 +37,10 @@
   border: 1px solid rgba(203, 202, 202, 0.682);
 
 }
+
+.btn-close:focus {
+  box-shadow: none !important;
+}
 @media screen  and (max-width:768px){
   .comon-border{
     border: none;
