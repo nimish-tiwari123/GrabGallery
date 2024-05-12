@@ -125,7 +125,7 @@ const ProductTable = () => {
       </Row>
       <Container fluid className="d-flex justify-content-center">
         <Row className="position-absolute bottom-0 mb-5 d-flex m-auto ">
-          <Pagination totalPages={5} currentPage={1} onPageChange={true} />
+          <Pagination totalPages={3} currentPage={1} onPageChange={true} />
         </Row>
       </Container>
     </Container>
