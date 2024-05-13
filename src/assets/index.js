@@ -5,7 +5,7 @@ import noconnection from "./noconnection.svg";
 import nodata from "./nodata.svg";
 import pagenotfound from "./pagenotfound.svg";
 import noImage from "./noImage.svg";
-
+import deleteVector from "./deleteVector.png";
 import responsiveIcon from "./responsiveicon.svg";
 import dashboardVector from "./dasboardVector.png";
 
@@ -18,4 +18,5 @@ export {
   responsiveIcon,
   noImage,
   dashboardVector,
+  deleteVector
 };

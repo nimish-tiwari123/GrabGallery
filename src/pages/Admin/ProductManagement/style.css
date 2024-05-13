@@ -41,6 +41,9 @@
 .btn-close:focus {
   box-shadow: none !important;
 }
+.header-row{
+  background-color: #d0cfdc54;
+}
 @media screen  and (max-width:768px){
   .comon-border{
     border: none;
