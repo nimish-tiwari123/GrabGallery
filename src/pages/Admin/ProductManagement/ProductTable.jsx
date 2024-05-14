@@ -18,36 +18,36 @@ const ProductTable = () => {
         <Row className="header-row rounded-2 py-3 d-none d-md-flex">
           <Col className="sno">
             S.No.
-            <img src={tableheader} alt="" className="ms-2" />
+           
           </Col>
           <Col className="product-image">
             Product Image
-            <img src={tableheader} alt="" className="ms-2" />
+           
           </Col>
           <Col className="product-name">
             Product Name
-            <img src={tableheader} alt="" className="ms-2" />
+           
           </Col>
 
           <Col className="price">
             Price
-            <img src={tableheader} alt="" className="ms-2" />
+           
           </Col>
           <Col className="stock-status">
             Stock Status
-            <img src={tableheader} alt="" className="ms-2" />
+           
           </Col>
           <Col className="quantity">
             Quantity
-            <img src={tableheader} alt="" className="ms-2" />
+           
           </Col>
           <Col className="created-at">
             Created At
-            <img src={tableheader} alt="" className="ms-2" />
+           
           </Col>
           <Col className="action">
             Action
-            <img src={tableheader} alt="" className="ms-2" />
+           
           </Col>
         </Row>
         {/* Sample data */}

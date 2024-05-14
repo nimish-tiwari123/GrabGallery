@@ -9,6 +9,7 @@ const InputField = (props) => {
     formik,
     type = "text",
     required,
+    readOnly=false
   } = props;
 
   return (
@@ -27,6 +28,7 @@ const InputField = (props) => {
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         value={formik.values[name]}
+        readOnly={readOnly}
         style={{
           border: `1.5px solid ${
             formik.touched[name] && formik.errors[name]

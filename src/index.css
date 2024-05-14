@@ -42,3 +42,9 @@
 .cursor-pointer {
   cursor: pointer;
 }
+
+.css-13cymwt-control{
+  background-color: var(--subSecondary) !important;
+  border-radius: 7px !important;
+  padding: 1.7px !important;
+}

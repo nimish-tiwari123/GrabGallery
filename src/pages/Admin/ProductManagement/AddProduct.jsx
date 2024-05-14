@@ -1,6 +1,6 @@
 import { Container, Row, Col, Breadcrumb } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import { backIcon, upload } from "../../../assets/icons";
@@ -10,11 +10,13 @@ import RadioField from "../../../components/InputField/RadioField";
 import { addproductSchema } from "../../../schema/ProductManagement";
 import { noImage } from "../../../assets";
 import SelectField from "../../../components/InputField/SelectField";
+import MultiSelect from "../../../components/InputField/MultiSelect";
 import {
   categoryOptions,
   clothingCategories,
   sizeOptions,
   ageOptions,
+  colorOptions,
 } from "../constant";
 import "./style.css";
 
@@ -27,6 +29,9 @@ const AddProduct = () => {
     setSelectedCategory(selectedOption.target.value); // Use target.value to get the selected value
   };
 
+  
+
+  // Calculate discount price based on price and discount
   const validationSchema = addproductSchema;
   const formik = useFormik({
     initialValues: {
@@ -35,15 +40,16 @@ const AddProduct = () => {
       clothingCategories: "tshirts",
       brand: "",
       productImages: selectedImages,
-      color: "",
+      color: [],
       material: "",
-      size: "",
-      age: "",
+      size: [],
+      age: [],
       description: "",
       featured: false,
-      price: "",
-      discount: "",
-      discountPrice: "",
+      price: 0,
+      discount: 0,
+      // Calculating discountPrice based on price and discount
+      discountPrice: 0,
       discountStartDate: "",
       discountEndDate: "",
       tax: "",
@@ -51,11 +57,17 @@ const AddProduct = () => {
       availableStock: "",
       stockStatus: "In Stock", // Assuming default value is "In Stock"
     },
+
     validationSchema,
     onSubmit: async (values) => {
       console.log(values);
     },
   });
+
+    useEffect(() => {
+   formik.setFieldValue("discountPrice", (formik.values.price - (formik.values.price * formik.values.discount) / 100).toFixed(2));
+  }, [formik.values.discount,formik.values.price]);
+
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
     if (files.length + selectedImages.length > 6) {
@@ -150,30 +162,6 @@ const AddProduct = () => {
                         onChange={handleCategoryChange}
                       />
                     </Col>
-
-                    {selectedCategory === "mens" ||
-                    selectedCategory === "womens" ? (
-                      <Col md={6} className="mt-2">
-                        {/* Render size field for men or women */}
-                        <SelectField
-                          label="Size"
-                          name="size"
-                          options={sizeOptions}
-                          formik={formik}
-                        />
-                      </Col>
-                    ) : selectedCategory === "kids" ? (
-                      <Col md={6} className="mt-2">
-                        {/* Render age field for kids */}
-                        <SelectField
-                          label="Age"
-                          name="age"
-                          options={ageOptions}
-                          formik={formik}
-                        />
-                      </Col>
-                    ) : null}
-
                     <Col md={6} className="mt-2">
                       <SelectField
                         label="Clothing Categories"
@@ -183,13 +171,35 @@ const AddProduct = () => {
                         required="*"
                       />
                     </Col>
+                    {selectedCategory === "mens" ||
+                    selectedCategory === "womens" ? (
+                      <Col md={6} className="mt-2">
+                        {/* Render size field for men or women */}
+                        <MultiSelect
+                          label="Size"
+                          name="size"
+                          options={sizeOptions}
+                          formik={formik}
+                        />
+                      </Col>
+                    ) : selectedCategory === "kids" ? (
+                      <Col md={6} className="mt-2">
+                        {/* Render age field for kids */}
+                        <MultiSelect
+                          label="Age"
+                          name="age"
+                          options={ageOptions}
+                          formik={formik}
+                        />
+                      </Col>
+                    ) : null}
 
                     <Col md={6} className="mt-2">
-                      <InputField
+                      <MultiSelect
                         label="Color"
                         required="*"
                         name="color"
-                        placeholder="Product Color"
+                        options={colorOptions}
                         formik={formik}
                       />
                     </Col>
@@ -308,6 +318,7 @@ const AddProduct = () => {
                     name="discountPrice"
                     placeholder="Discount Price"
                     formik={formik}
+                    readOnly={true}
                   />
                 </Col>
                 <Col lg={4} md={6} className="mt-2">
